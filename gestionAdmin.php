@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+/* PAGE DE GESTION DES ADMINS */
+
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
 

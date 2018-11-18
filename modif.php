@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 /* PAGE DE MODIFICATIONS DE CONCERTS ( et artiste) */
 
 // Date francaise 

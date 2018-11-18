@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+/* PANIER */
+
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
 

@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+/* PAGE D INFORMATION SUR LE CLIENT */
+
 include 'connexionPostgres.php';
 $connexion=connexion();
 

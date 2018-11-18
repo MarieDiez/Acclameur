@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+/* PAGE DES COMMANDES */
+
 include 'connexionPostgres.php';
 $connexion=connexion();
 
