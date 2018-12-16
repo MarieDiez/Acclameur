@@ -162,12 +162,13 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 									</div>
 									
 								<?php endfor;?>
-									
+					
+					<?php if($genre != "tous"):?>
 					<section class="wrapper style3 container special">
 						<p>Description : </p>
 						<p><?=$res1[description]?></p>
-					
 					</section>
+					<?php endif;?>
 				</article>
 
 			<!-- Footer -->

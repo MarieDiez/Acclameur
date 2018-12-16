@@ -3,6 +3,7 @@ session_start();
 
 /* PAGE DE PREGESTION : DIRIGE VERS LA GESTION A EFFECTUER */
 
+
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
 

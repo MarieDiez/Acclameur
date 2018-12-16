@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-/* PAGE DU CONCERT */
-
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
 
@@ -140,6 +138,12 @@ $info3->execute();
 $res3=$info3->fetchAll(PDO::FETCH_OBJ);
 
 
+// lien iFrame 
+$sqlIFrame="select lienIframe from concertIndex where id_concertIndex=:id";
+$info=$connexion->prepare($sqlIFrame);
+$info->bindParam(":id",$idConcert);
+$info->execute();
+$lienIframe=$info->fetch(PDO::FETCH_OBJ)->lieniframe;
 
 
 // Admin
@@ -231,7 +235,7 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 										<header>
 											<h3>Lieu</h3>
 										</header>
-										<p class="cadre"><?=$res->lieu?></p>	
+										<p class="cadre"><a href="carteConcert.php?id_concertIndex=<?=$idConcert?>" target="_blank"><?=$res->lieu?></a></p>	
 									</section>
 
 								</div>
@@ -302,8 +306,8 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 						<?php else :?>
 							<a href="connexionSignIn.php" class="button primary ">Réserver ce concert</a>
 						<?php endif;?>
-					</section>
-						
+						<!-- lien iframe dans bd -> position -->	
+					</section>		
 				</article>
 
 			<!-- Footer -->

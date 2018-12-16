@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-/* PAGE DE PAIEMENT */
-
 include 'connexionPostgres.php';
 $connexion=connexion();
 
@@ -80,7 +78,7 @@ $cmtp=0;
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Paiement</title>
+		<title>Paiment</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />

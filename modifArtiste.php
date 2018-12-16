@@ -1,7 +1,9 @@
 <?php
 session_start();
 
+
 /* PAGE DE MODIFICATION DES ARTISTES */
+
 
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');

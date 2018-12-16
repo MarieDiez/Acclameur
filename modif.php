@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 /* PAGE DE MODIFICATIONS DE CONCERTS ( et artiste) */
 
 // Date francaise 
@@ -59,17 +61,20 @@ if (isset($_GET['idconcert']) && !empty($_GET['idconcert'])){
 	// POST 
 	// si on modifie le formulaire on met a jour la base de données : elle sera mise a jour meme sans modification
 	if (isset($_POST["send"])){
-		if (!empty($_POST["lieu"]) && (!empty($_POST["prix"]) || $_POST["prix"]==0)  && !empty($_POST["description"]) && !empty($_POST["nbPlaces"]) && !empty($_POST["nbplaceslibres"]) && (!empty($_POST['importance']) || $_POST['importance']==0)){
+		if (!empty($_POST["lieu"]) && (!empty($_POST["prix"]) || $_POST["prix"]==0)  && !empty($_POST["description"]) && !empty($_POST["nbPlaces"]) && !empty($_POST["nbplaceslibres"]) && (!empty($_POST['importance']) || $_POST['importance']==0)&& (!empty($_POST["lat"]) || $_POST["lat"] ==0 ) && (!empty($_POST["long"]) || $_POST["long"] ==0 ) && (!empty($_POST["iframe"]))){
 
 			// on recupere les informations du formulaire
 			$dateconcert=$_POST["dateconcert"];
-			$lieu=$_POST["lieu"];
+			$lieu=htmlspecialchars($_POST["lieu"]);
 			$prix=$_POST["prix"];
 			$genreconcert=$_POST["genreconcert"];
 			$description=$_POST["description"];
-			$nbplaces=$_POST["nbPlaces"];
-			$nbplaceslibres=$_POST["nbplaceslibres"];
+			$nbplaces=htmlspecialchars($_POST["nbPlaces"]);
+			$nbplaceslibres=htmlspecialchars($_POST["nbplaceslibres"]);
 			$importance=$_POST["importance"];
+			$lat=$_POST["lat"];
+			$long=$_POST["long"];
+			$iframe=$_POST["iframe"];
 			
 			// on verifie que les modifications n'entraine pas de double concert
 			$sqlverif="select * from concertIndex where lieu=:lieu and dateconcert=:date";
@@ -83,10 +88,11 @@ if (isset($_GET['idconcert']) && !empty($_GET['idconcert'])){
 			
 			else {
 				// si tout est bon on met a jour la base de données
-				$sql3="update concertIndex set importance=:importance, genreconcert=:genreconcert, lieu=:lieu, dateconcert=:dateconcert, description=:description, prix=:prix, nbplaces=:nbplaces, nbplaceslibres=:nbplaceslibres where id_concertIndex=:idconcert;";
+				$sql3="update concertIndex set importance=:importance, genreconcert=:genreconcert, lieu=:lieu, dateconcert=:dateconcert, description=:description, prix=:prix, nbplaces=:nbplaces, nbplaceslibres=:nbplaceslibres, lat=:lat, long=:long, lieniframe=:iframe where id_concertIndex=:idconcert;";
 				$info3=$connexion->prepare($sql3);
 				$info3->execute(array('importance'=>$importance,'genreconcert'=>$genreconcert,'lieu'=>$lieu,'dateconcert'=>$dateconcert,
-				'description'=>$description,'prix'=>$prix,'nbplaces'=>$nbplaces,'nbplaceslibres'=>$nbplaceslibres,'idconcert'=>$idconcert));
+				'description'=>$description,'prix'=>$prix,'nbplaces'=>$nbplaces,'nbplaceslibres'=>$nbplaceslibres,
+				'idconcert'=>$idconcert,"lat"=>$lat,"long"=>$long,"iframe"=>$iframe));
 			
 				// on se redirige vers la page de gestion du concert
 				echo("<script>alert(\"Modification prise en compte !\")</script>");
@@ -255,7 +261,15 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 									<div class="col-12">				
 										<input type="text" name="description" value="<?=$res->description?>" placeholder="Description du concert">
 									</div>
-																	
+									<div class="col-12">				
+										<input type="text" name="iframe" value="<?=$res->lieniframe?>">
+									</div>	
+									<div class="col-6 col-12-mobile">				
+										<input type="number" name="lat" value="<?=$res->lat?>">
+									</div>
+									<div class="col-6 col-12-mobile">				
+										<input type="number" name="long" value="<?=$res->long?>">
+									</div>				
 									<div class="col-12">				
 									<input type="submit" name="send" value="Modifier">
 									</div>

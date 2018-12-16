@@ -1,7 +1,12 @@
 <?php
 session_start();
 
+
+
 /* PAGE D AFFICHAGE DES ARTISTES A MODIFIER */
+
+
+
 
 // Date francaise 
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
@@ -60,7 +65,7 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 
 <html>
 	<head>
-		<title>L'Acclameur</title>
+		<title><?=$res->genreconcert?></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />

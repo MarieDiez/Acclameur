@@ -19,7 +19,9 @@ include 'connexionPostgres.php';
 
 $connexion=connexion();
 
-
+if (isset($_GET["controller"]) && $_GET["controller"]=="api"){
+	header("Location:Api/indexApi.php");
+}
 
 // REQUETE SQL 
 
@@ -349,13 +351,14 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 			<!-- CTA -->
 				<section id="cta2">
 					<header>
-						<h2>Inscrivez-vous !</h2>
+						<h2>Retrouver notre carte des concerts !</h2>
 					</header>
 					<footer>
 						<ul class="buttons">
-							<li><a href="inscription.php" class="button primary">Inscription</a></li>
+							<li><a href="Api/carte/index.html" class="button" target="_blank">Où sont mes concerts ?</a></li>
 						</ul>
 					</footer>
+					
 				</section>
 
 			<!-- Footer -->

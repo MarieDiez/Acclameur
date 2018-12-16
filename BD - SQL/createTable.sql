@@ -1,3 +1,4 @@
+
 DROP TABLE if exists ligne_commande;
 DROP TABLE if exists commande;
 DROP TABLE if exists groupe_artiste;
@@ -33,6 +34,9 @@ CREATE TABLE concertIndex (
 	prix integer,
 	nbPlaces integer,
 	nbPlacesLibres integer  CHECK ( nbPlacesLibres <= nbPlaces),
+	lat integer,
+	long integer,
+	lienIframe text,
 	foreign key (genreConcert) REFERENCES concertGenre(genreConcert)
 );
 

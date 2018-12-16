@@ -1,8 +1,6 @@
 <?php 
 session_start();
 
-/* PAGE D INFORMATION SUR LE CLIENT */
-
 include 'connexionPostgres.php';
 $connexion=connexion();
 
@@ -110,7 +108,7 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 				</header>
 					<section class="wrapper style3 container">
 						<h1>Informations du client </h1>
-							<ul>
+					<ul>
 						<li>Nom : <?=$resnom->nom?></li> 
 						<li>Prenom : <?=$resnom->prenom?></li> 
 						<li>Ville : <?=$resnom->ville?></li>

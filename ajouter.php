@@ -196,7 +196,7 @@ if (isset($_GET['element']) && !empty($_GET['element'])){
 	if (isset($_POST["send"]) && $element=="concert"){
 		
 		
-		if ((!empty($_POST["importance"]) || $_POST["importance"] ==0) && !empty($_POST["dateconcert"])&& !empty($_POST["lieu"]) && (!empty($_POST["prix"]) || $_POST["prix"] ==0) && !empty($_POST["genreconcert"]) && !empty($_POST["nbplaces"]) && !empty($_POST["nbplaceslibres"]) && !empty($_POST["description"])&& (!empty($_POST["nblienconcert"]) || $_POST["nblienconcert"]==0)){
+		if ((!empty($_POST["importance"]) || $_POST["importance"] ==0) && !empty($_POST["dateconcert"])&& !empty($_POST["lieu"]) && (!empty($_POST["prix"]) || $_POST["prix"] ==0) && !empty($_POST["genreconcert"]) && !empty($_POST["nbplaces"]) && !empty($_POST["nbplaceslibres"]) && !empty($_POST["description"])&& (!empty($_POST["nblienconcert"]) || $_POST["nblienconcert"]==0) && (!empty($_POST["lat"]) || $_POST["lat"] ==0 ) && (!empty($_POST["long"]) || $_POST["long"] ==0 ) && (!empty($_POST["iframe"]))){
 		
 			
 			// lors de la creation d un concert on indique le nombre de lien que l on veut faire avec un artiste
@@ -211,7 +211,10 @@ if (isset($_GET['element']) && !empty($_GET['element'])){
 			$nbplaces=htmlspecialchars($_POST["nbplaces"]);
 			$nbplaceslibres=htmlspecialchars($_POST["nbplaceslibres"]);
 			$description=htmlspecialchars($_POST["description"]);
-					
+			$lat=$_POST["lat"];
+			$long=$_POST["long"];	
+			$iframe=htmlspecialchars($_POST["iframe"]);
+			
 			// condition de securite pour le nombre de place
 			if ($nbplaceslibres>$nbplaces){
 				echo("<script>alert(\"Le nombres de place disponible ne peut pas être > aux nombres de places totales\")</script>");		
@@ -237,11 +240,11 @@ if (isset($_GET['element']) && !empty($_GET['element'])){
 				else {
 				
 					// insertion du concert dans la table concertIndex
-					$sql0="insert into concertIndex(importance,genreconcert,lieu,dateconcert,description,prix,nbplaces,nbplaceslibres) values (:importance,:genreconcert,:lieu,:dateconcert,:description,:prix,:nbplaces,:nbplaceslibres)";
+					$sql0="insert into concertIndex(importance,genreconcert,lieu,dateconcert,description,prix,nbplaces,nbplaceslibres,lat,long,lieniframe) values (:importance,:genreconcert,:lieu,:dateconcert,:description,:prix,:nbplaces,:nbplaceslibres,:lat,:long,:iframe)";
 					$info0=$connexion->prepare($sql0);
 					$info0->execute(array("importance"=>$importance,
 					"genreconcert"=>$genreconcert,"lieu"=>$lieu,"dateconcert"=>$dateconcert,"description"=>$description,
-					"prix"=>$prix,"nbplaces"=>$nbplaces,"nbplaceslibres"=>$nbplaceslibres));
+					"prix"=>$prix,"nbplaces"=>$nbplaces,"nbplaceslibres"=>$nbplaceslibres,"lat"=>$lat,"long"=>$long,"iframe"=>$iframe));
 						
 					
 					// si il n y a pas de lien on se redirige vers la page d ajout
@@ -558,7 +561,7 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 								</div>		
 								<div class="col-12">				
 									<textarea name="description" placeholder="Description du concert" rows="5"></textarea>
-								</div>	
+								</div>		
 								<!-- si on est passer par la creation d artiste : on ne propose plus de lien avec un artiste -->
 								<?php if(isset($_GET['liaisonartiste'])):?>
 									<input type="hidden" name="nblienconcert" value="0">
@@ -567,6 +570,16 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 									<input type="number" name="nblienconcert"  placeholder="Nombre d'artiste à ajouter à ce concert">
 								</div>			
 								<?php endif;?>	
+								
+								<div class="col-12">				
+									<input type="text" name="iframe" placeholder="Lien Iframe">
+								</div>	
+								<div class="col-6 col-12-mobile">				
+									<input type="number" name="lat" placeholder="Latitude">
+								</div>
+								<div class="col-6 col-12-mobile">				
+									<input type="number" name="long" placeholder="Longitude">
+								</div>	
 								<div class="col-12">				
 								<input type="submit" name="send" value="Ajouter">
 								</div>
