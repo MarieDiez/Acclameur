@@ -259,7 +259,7 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 
 								<div class="content">
 									<section>
-										<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+									
 										<header>
 											<h2>Informations complémentaire :</h2>
 										</header>

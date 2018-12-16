@@ -312,7 +312,7 @@ if (isset($_GET['element']) && !empty($_GET['element'])){
 			$nblienartiste=htmlspecialchars($_POST["nblienartiste"]);
 			$nom_artiste=htmlspecialchars($_POST["nom_artiste"]);
 			$descriptionartiste=htmlspecialchars($_POST["descriptionartiste"]);
-			$img='images/'.$_FILES['fichier']['name'];
+			$img='images/'.$nom_artiste.'.jpg';
 			
 			// Test pour savoir si l artiste existe deja  
 			$sqlTest="select * from artiste ar where ar.nom_artiste=:nom_artiste";
@@ -346,14 +346,15 @@ if (isset($_GET['element']) && !empty($_GET['element'])){
 				// si les 2 sont vide on ajoute artiste sans nom/prenom
 				else {
 					// on insert
-					$sql="insert into artiste (nom_artiste,img,descriptionartiste) values (:nom_artiste,:img,:descriptionartiste)";
+			 		$sql="insert into artiste (nom_artiste,img,descriptionartiste) values (:nom_artiste,:img,:descriptionartiste)";
 					$info=$connexion->prepare($sql);
 					$info->execute(array("nom_artiste"=>$nom_artiste,"img"=>$img,"descriptionartiste"=>$descriptionartiste));
 					
 					
 				}
 				// on move upload l image a la fin de la creation
-				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$_FILES["fichier"]["name"]);
+				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$nom_artiste.'.jpg');
+				copy('images/'.$nom_artiste.'.jpg', 'images/banner'.$nom_artiste.'.jpg');
 				
 				// on met dans une session le nom d artiste
 				$_SESSION['nom_artiste']=$nom_artiste;

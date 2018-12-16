@@ -200,10 +200,7 @@ $libre=true;
 													</ul>
 												</footer>
 											</section>
-											<section>
-
-												<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-											</section>
+											
 										</div>
 										</div>
 									</div>

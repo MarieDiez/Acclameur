@@ -80,11 +80,12 @@ if (isset($_GET['idartiste']) && !empty($_GET['idartiste'])){
 			$descriptionartiste=$_POST["descriptionartiste"];
 			// on recupere l'id de l'artiste
 			$idartiste=$res0->id_artiste;
-			
+
 			// si l'image n'est pas modifier : on garde l'ancienne sinon on prend la nouvelle
 			if (!empty($_FILES['fichier']) && $_FILES['fichier']['error']==0){
-				$img='images/'.$_FILES['fichier']["name"];
-				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$_FILES["fichier"]["name"]);
+				$img='images/'.$nom_artiste.'.jpg';
+				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$nom_artiste.'.jpg');
+				copy('images/'.$nom_artiste.'.jpg', 'images/banner'.$nom_artiste.'.jpg');
 			}
 			else {
 				$img=$res0->img;
@@ -96,7 +97,8 @@ if (isset($_GET['idartiste']) && !empty($_GET['idartiste'])){
 			$info4=$connexion->prepare($sql4);
 			$info4->execute(array('nom'=>$nom,'prenom'=>$prenom,'nom_artiste'=>$nom_artiste,
 			'descriptionartiste'=>$descriptionartiste,'img'=>$img,'idartiste'=>$idartiste));			
-				
+			
+			
 			// si on vient d une page avec un concert : on s'y redirige 
 			if (isset($idconcert)){
 				header("Location:modif.php?idconcert=$idconcert");
