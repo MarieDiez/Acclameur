@@ -82,10 +82,11 @@ if (isset($_GET['idartiste']) && !empty($_GET['idartiste'])){
 			$idartiste=$res0->id_artiste;
 
 			// si l'image n'est pas modifier : on garde l'ancienne sinon on prend la nouvelle
+			$nomimg=str_replace(" ","",$nom_artiste);
 			if (!empty($_FILES['fichier']) && $_FILES['fichier']['error']==0){
-				$img='images/'.$nom_artiste.'.jpg';
-				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$nom_artiste.'.jpg');
-				copy('images/'.$nom_artiste.'.jpg', 'images/banner'.$nom_artiste.'.jpg');
+				$img='images/'.$nomimg.'.jpg';
+				move_uploaded_file($_FILES["fichier"]["tmp_name"], 'images/'.$nomimg.'.jpg');
+				copy('images/'.$nomimg.'.jpg', 'images/banner'.$nomimg.'.jpg');
 			}
 			else {
 				$img=$res0->img;
