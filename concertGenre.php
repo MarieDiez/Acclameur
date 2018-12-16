@@ -121,7 +121,11 @@ if (isset ($_GET['deco']) && !empty($_GET['deco'])){
 						<section class="wrapper style3 container special">
 
 							<header class="major">
-								<h2>Tous les concerts de <?=$genre?></h2>
+								<?php if($genre != "tous"):?>
+									<h2>Tous les concerts de <?=$genre?></h2>
+								<?php else :?>
+									<h2>Tous les concerts</h2>
+								<?php endif;?>
 							</header>
 
 								<!-- compteur d'élement du tableau : cmt -->
