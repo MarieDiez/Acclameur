@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     
     //appel des données
-    $.getJSON("http://localhost:1111/Api/indexApi.php",traitement);
+    $.getJSON("http://skanas.iiiii.info/Api/indexApi.php",traitement);
   
     
 });
