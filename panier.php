@@ -7,6 +7,7 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');
 include 'connexionPostgres.php';
 $connexion=connexion();
 
+
 // augmenter le nombre de billets 
 if (isset($_POST["send"]) && !empty($_POST["number"]) && isset($_GET["id_concert"]) && !empty($_GET["id_concert"])){
 	$_SESSION["panier"][$_GET["id_concert"]]=$_POST["number"];
